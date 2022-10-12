@@ -1,4 +1,4 @@
-package com.example.Masterclass;
+package com.example.masterclass;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
