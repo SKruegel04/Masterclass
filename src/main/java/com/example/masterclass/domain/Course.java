@@ -13,7 +13,6 @@ public class Course {
     String description;
     String category;
     Date date;
-
     int duration;
 
     public Course() {

@@ -1,9 +1,11 @@
 package com.example.masterclass.service;
 
 import com.example.masterclass.domain.Course;
-import com.example.masterclass.domain.repository.CourseRepository;
+import com.example.masterclass.domain.CourseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class CourseService {
@@ -19,6 +21,10 @@ public class CourseService {
     }
     public Course get(Long id) {
         return courseRepository.findById(id).orElseThrow(RuntimeException::new);
+    }
+
+    public List<Course> getAll() {
+        return courseRepository.findAll();
     }
 
     public void delete(Long id) {
