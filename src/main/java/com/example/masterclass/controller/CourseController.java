@@ -1,11 +1,14 @@
 package com.example.masterclass.controller;
 
-import com.example.masterclass.domain.Course;
+import com.example.masterclass.domain.courses.CourseCreateRequest;
+import com.example.masterclass.domain.courses.CourseDetailResponse;
+import com.example.masterclass.domain.courses.CourseListResponse;
+import com.example.masterclass.domain.courses.CourseUpdateRequest;
 import com.example.masterclass.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -18,17 +21,17 @@ public class CourseController {
     }
 
     @GetMapping("/courses")
-    public List<Course> getCourses() {
+    public List<CourseListResponse> getCourses() {
         return courseService.getAll();
     }
 
     @PostMapping("/courses")
-    public Course createCourse(@RequestBody Course course) {
-        return courseService.save(course);
+    public CourseDetailResponse createCourse(@Valid @RequestBody CourseCreateRequest course) {
+        return courseService.create(course);
     }
 
     @GetMapping("/courses/{id}")
-    public Course getCourse(@PathVariable String id) {
+    public CourseDetailResponse getCourse(@PathVariable String id) {
         Long courseId = Long.parseLong(id);
         return courseService.get(courseId);
     }
@@ -40,7 +43,10 @@ public class CourseController {
     }
 
     @PutMapping("/courses/{id}")
-    public Course updateCourse(@PathVariable String id, @RequestBody Course update) {
+    public CourseDetailResponse updateCourse(
+        @PathVariable String id,
+        @Valid @RequestBody CourseUpdateRequest update
+    ) {
         Long courseId = Long.parseLong(id);
         return courseService.update(courseId, update);
     }
