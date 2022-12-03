@@ -9,5 +9,4 @@ class MasterclassApplicationTests {
 	@Test
 	void contextLoads() {
 	}
-
 }

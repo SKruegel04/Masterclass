@@ -6,6 +6,12 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Wofür ist <EntityName> da?
+ * - Repräsentiert die _relationalen_ Daten eines User
+ * - Das sind die Daten, die "O/R-gemappt" werden
+ * - Sind einfache DTOs/POJOs
+ */
 @Entity
 @Table(name = "users")
 public class User {
@@ -14,6 +20,7 @@ public class User {
     Long id;
     String name;
     String description;
+
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private List<Course> courses = new ArrayList<>();
 

@@ -12,6 +12,10 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = {
+    "http://localhost:8081",
+    "https://htw-masterclass.herokuapp.com"
+})
 public class CourseController {
     CourseService courseService;
 

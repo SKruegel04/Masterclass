@@ -1,5 +1,9 @@
 package com.example.masterclass.domain.users;
 
+/**
+ * Wofür ist <EntityName>ListResponse da?
+ * - Stellt die Ausgabe mehrerer User an den Endnutzer dar, wenn _mehrere_ User abgerufen werden
+ */
 public class UserListResponse {
     Long id;
     String name;

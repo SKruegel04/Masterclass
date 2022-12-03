@@ -3,6 +3,11 @@ package com.example.masterclass.service;
 import com.example.masterclass.domain.users.*;
 import org.springframework.stereotype.Service;
 
+/**
+ * Was ist die Aufgabe des <EntityName>Transformer?
+ * - Transformiert von DTOs/POJOs zu anderen DTOs/POJOs
+ * - Erstellt Instanz der neuen DTO/POJO; Überträgt aus der Übergebenen
+ */
 @Service
 public class UserTransformer {
     public UserListResponse createUserListResponse(User user) {

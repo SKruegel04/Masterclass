@@ -7,7 +7,16 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * Was ist die Aufgabe des <EntityName>Controller?
+ * - Definiert REST-Endpunkte, Dokumentation/Definition für REST-API
+ * - Leitet tatsächliche Aufgaben an <EntityName>Service
+ */
 @RestController
+@CrossOrigin(origins = {
+    "http://localhost:8081",
+    "https://htw-masterclass.herokuapp.com"
+})
 public class UserController {
     UserService userService;
 

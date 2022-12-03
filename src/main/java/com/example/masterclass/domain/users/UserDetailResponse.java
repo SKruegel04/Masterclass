@@ -1,5 +1,9 @@
 package com.example.masterclass.domain.users;
 
+/**
+ * Wofür ist <EntityName>DetailResponse da?
+ * - Stellt die Ausgabe eines Users an den Endnutzer dar, wenn ein _einzelner_ User abgerufen wird
+ */
 public class UserDetailResponse {
     Long id;
     String name;

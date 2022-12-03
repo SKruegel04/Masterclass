@@ -1,5 +1,9 @@
 package com.example.masterclass.domain.users;
 
+/**
+ * Wofür ist <EntityName>UpdateRequest da?
+ * - Stellt die Daten dar, die ein Endnutzer übergeben kann, um einen User zu aktualisieren
+ */
 public class UserUpdateRequest {
     String name;
     String description;

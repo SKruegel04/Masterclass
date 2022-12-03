@@ -8,6 +8,11 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Was ist die Aufgabe des <EntityName>Service?
+ * - Schicht/Schnittstelle zwischen Controller (User) und Repository (Datenbank; Business)
+ * - Anfragen vom User verarbeiten, Business Logik durchführen und Interaktion/Übersetzung für Datenbank
+ */
 @Service
 public class UserService {
     UserRepository userRepository;
