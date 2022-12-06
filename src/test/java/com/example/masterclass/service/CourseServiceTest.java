@@ -23,16 +23,16 @@ public class CourseServiceTest {
     @Test
     void create() {
         CourseService courseService = new CourseService(
-                courseRepository,
-                new CourseTransformer()
+            courseRepository,
+            new CourseTransformer()
         );
 
         CourseCreateRequest courseCreateRequest = new CourseCreateRequest(
-                "Ballett Anfänger",
-                "Ballett für Anfänger und Tänzer die ihre Technik verbessern wollen.",
-                "Ballett",
-                Date.from(Instant.parse("2022-12-02T15:00:00Z")),
-                90
+            "Ballett Anfänger",
+            "Ballett für Anfänger und Tänzer die ihre Technik verbessern wollen.",
+            "Ballett",
+            Date.from(Instant.parse("2022-12-02T15:00:00Z")),
+            90
         );
         CourseDetailResponse response = courseService.create(courseCreateRequest);
         assertEquals("Ballett Anfänger", response.getTitle());
@@ -84,8 +84,8 @@ public class CourseServiceTest {
     @Test
     void getAll() {
         CourseService courseService = new CourseService(
-                courseRepository,
-                new CourseTransformer()
+            courseRepository,
+            new CourseTransformer()
         );
         courseService.create(new CourseCreateRequest("Ballett Anfänger", "Ballett für Anfänger", "Ballett",
                 Date.from(Instant.parse("2022-12-10T18:00:00.00Z")), 90));
