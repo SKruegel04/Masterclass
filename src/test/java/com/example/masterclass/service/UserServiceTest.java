@@ -1,6 +1,8 @@
 package com.example.masterclass.service;
 
+import com.example.masterclass.domain.courses.CourseListResponse;
 import com.example.masterclass.domain.users.*;
+import org.assertj.core.util.Strings;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -8,8 +10,7 @@ import org.springframework.test.annotation.DirtiesContext;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
@@ -60,17 +61,12 @@ public class UserServiceTest {
             userRepository,
             new UserTransformer()
         );
-        userService.create(new UserCreateRequest("Marcie Haydee", "Ballettlehrerin"));
-        userService.create(new UserCreateRequest("Martha Grayham", "Contemporarylehrerin"));
-        userService.create(new UserCreateRequest("Amanda Nunez", "MMA-Trainerin"));
-
         List<UserListResponse> users = userService.getAll();
 
-        assertEquals(3, users.size());
         UserListResponse user1 = users.get(0);
-        assertEquals("Marcie Haydee", user1.getName());
+        assertFalse(Strings.isNullOrEmpty(user1.getName()));
         UserListResponse user3 = users.get(2);
-        assertEquals("MMA-Trainerin", user3.getDescription());
+        assertFalse(Strings.isNullOrEmpty(user3.getDescription()));
     }
 
     @Test
@@ -79,18 +75,13 @@ public class UserServiceTest {
             userRepository,
             new UserTransformer()
         );
-        userService.create(new UserCreateRequest("Marcie Haydee", "Ballettlehrerin"));
-        UserDetailResponse response = userService.create(
-            new UserCreateRequest("Martha Grayham", "Contemporarylehrerin")
-        );
-        userService.create(new UserCreateRequest("Amanda Nunez", "MMA-Trainerin"));
-
-        userService.delete(response.getId());
-
-        assertThrows(RuntimeException.class, () -> userService.get(response.getId()));
 
         List<UserListResponse> users = userService.getAll();
-        assertEquals(2, users.size());
+        UserListResponse firstUser = users.get(0);
+
+        userService.delete(firstUser.getId());
+
+        assertThrows(RuntimeException.class, () -> userService.get(firstUser.getId()));
     }
 
     @Test
