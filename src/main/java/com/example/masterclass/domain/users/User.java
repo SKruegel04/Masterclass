@@ -21,7 +21,7 @@ public class User {
     String name;
     String description;
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = {CascadeType.REMOVE})
     private List<Course> courses = new ArrayList<>();
 
     public User(String name, String description) {

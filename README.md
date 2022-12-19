@@ -3,8 +3,9 @@
 # Masterclass
 
 Mit Masterclass können Kurse angelegt und verwaltet werden.
-Kursgeber können sich anmelden und Kurse anlegen und terminieren sowie Teilnehmerlisten einsehen.
-User können Kurse buchen und wieder abzusagen.
+Nutzer können Kurse anlegen und terminieren sowie bearbeiten und löschen.
+User können eine Übersicht der Kurse und eine Übersicht der Nutzer einsehen.
+Nutzer können erstellt und wieder gelöscht werden.
 
 # Starten
 

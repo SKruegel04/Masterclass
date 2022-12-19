@@ -1,5 +1,6 @@
 package com.example.masterclass.domain.courses;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.Min;
@@ -18,17 +19,21 @@ public class CourseCreateRequest {
     @NotBlank
     String category;
     @NotNull
+    @JsonFormat(pattern="yyyy-MM-dd'T'HH:mm")
     Date date;
     @Min(15)
     int duration;
+    @NotNull
+    Long userId;
 
     public CourseCreateRequest(String title, String description, String category,
-                               Date date, int duration) {
+                               Date date, int duration, long userId) {
         this.title = title;
         this.description = description;
         this.category = category;
         this.date = date;
         this.duration = duration;
+        this.userId = userId;
     }
 
     public String getTitle() {
@@ -69,5 +74,13 @@ public class CourseCreateRequest {
 
     public void setDuration(int duration) {
         this.duration = duration;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 }

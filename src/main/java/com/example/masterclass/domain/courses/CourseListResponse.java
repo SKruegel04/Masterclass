@@ -1,5 +1,8 @@
 package com.example.masterclass.domain.courses;
 
+import com.example.masterclass.domain.users.UserListResponse;
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 
 public class CourseListResponse {
@@ -7,17 +10,20 @@ public class CourseListResponse {
     String title;
     String description;
     String category;
+    @JsonFormat(pattern="yyyy-MM-dd'T'HH:mm")
     Date date;
     int duration;
+    UserListResponse user;
 
     public CourseListResponse(Long id, String title, String description, String category,
-                              Date date, int duration) {
+                              Date date, int duration, UserListResponse user) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.category = category;
         this.date = date;
         this.duration = duration;
+        this.user = user;
     }
 
     public Long getId() {
@@ -66,5 +72,13 @@ public class CourseListResponse {
 
     public void setDuration(int duration) {
         this.duration = duration;
+    }
+
+    public UserListResponse getUser() {
+        return user;
+    }
+
+    public void setUser(UserListResponse user) {
+        this.user = user;
     }
 }
