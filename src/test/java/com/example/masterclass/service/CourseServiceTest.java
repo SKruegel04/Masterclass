@@ -1,11 +1,11 @@
 package com.example.masterclass.service;
 
 import com.example.masterclass.domain.courses.*;
+import com.example.masterclass.domain.users.UserRepository;
 import org.assertj.core.util.Strings;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.annotation.DirtiesContext;
 
 import java.sql.Date;
 import java.time.Instant;
@@ -14,8 +14,10 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
-@DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
 public class CourseServiceTest {
+
+    @Autowired
+    UserRepository userRepository;
 
     @Autowired
     CourseRepository courseRepository;
@@ -24,7 +26,7 @@ public class CourseServiceTest {
     void create() {
         CourseService courseService = new CourseService(
             courseRepository,
-            new CourseTransformer()
+            new CourseTransformer(userRepository, new UserTransformer())
         );
 
         CourseCreateRequest courseCreateRequest = new CourseCreateRequest(
@@ -32,7 +34,8 @@ public class CourseServiceTest {
             "Ballett für Anfänger und Tänzer die ihre Technik verbessern wollen.",
             "Ballett",
             Date.from(Instant.parse("2022-12-02T15:00:00Z")),
-            90
+            90,
+            1
         );
         CourseDetailResponse response = courseService.create(courseCreateRequest);
         assertEquals("Ballett Anfänger", response.getTitle());
@@ -46,7 +49,7 @@ public class CourseServiceTest {
     void get() {
         CourseService courseService = new CourseService(
             courseRepository,
-            new CourseTransformer()
+            new CourseTransformer(userRepository, new UserTransformer())
         );
 
         courseService.create(new CourseCreateRequest(
@@ -54,21 +57,24 @@ public class CourseServiceTest {
             "Ballett für Anfänger und Tänzer die ihre Technik verbessern wollen.",
             "Ballett",
             Date.from(Instant.parse("2022-12-10T18:00:00.00Z")),
-            90
+            90,
+            1
         ));
         CourseDetailResponse createResponse = courseService.create(new CourseCreateRequest(
             "Ballett Anfänger",
             "Ballett für Anfänger und Tänzer die ihre Technik verbessern wollen.",
             "Ballett",
             Date.from(Instant.parse("2022-12-10T18:00:00.00Z")),
-            90
+            90,
+            1
         ));
         courseService.create(new CourseCreateRequest(
             "Contemporary Fortgeschritten",
             "Contemporary für Fortgeschrittene",
             "Contemporary",
             Date.from(Instant.parse("2022-12-13T18:00:00.00Z")),
-            90
+            90,
+            1
         ));
 
         CourseDetailResponse getResponse = courseService.get(createResponse.getId());
@@ -85,7 +91,7 @@ public class CourseServiceTest {
     void getAll() {
         CourseService courseService = new CourseService(
             courseRepository,
-            new CourseTransformer()
+            new CourseTransformer(userRepository, new UserTransformer())
         );
 
         List<CourseListResponse> courses = courseService.getAll();
@@ -100,7 +106,7 @@ public class CourseServiceTest {
     void delete() {
         CourseService courseService = new CourseService(
                 courseRepository,
-                new CourseTransformer()
+                new CourseTransformer(userRepository, new UserTransformer())
         );
 
         List<CourseListResponse> courses = courseService.getAll();
@@ -115,16 +121,16 @@ public class CourseServiceTest {
     void update() {
         CourseService courseService = new CourseService(
                 courseRepository,
-                new CourseTransformer()
+                new CourseTransformer(userRepository, new UserTransformer())
         );
         CourseDetailResponse createResponse = courseService.create(
                 new CourseCreateRequest("Contemporary Mittelstufe", "Contemporary mit mittlerem Level",
-                        "Contemporary", Date.from(Instant.parse("2022-12-10T18:00:00.00Z")), 90)
+                        "Contemporary", Date.from(Instant.parse("2022-12-10T18:00:00.00Z")), 90, 1L)
         );
         courseService.update(
                 createResponse.getId(),
                 new CourseUpdateRequest("Contemporary Mittelstufe", "Contemporary mit mittlerem Level",
-                        "Contemporary", Date.from(Instant.parse("2022-12-10T18:00:00.00Z")), 60)
+                        "Contemporary", Date.from(Instant.parse("2022-12-10T18:00:00.00Z")), 60, 1L)
         );
         CourseDetailResponse getResponse = courseService.get(createResponse.getId());
 
